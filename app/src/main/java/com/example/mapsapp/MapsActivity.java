@@ -46,7 +46,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //todo probably need to get rid of activity_maps xml later
 
         // Initialize the SDK
-        Places.initialize(getApplicationContext(), "@string/google_maps_key");
+        // todo get Places to recognize API key from local properties
+        Places.initialize(getApplicationContext(), apikeyhere until fixed);
 
         // Create a new PlacesClient instance
         PlacesClient placesClient = Places.createClient(this);
@@ -59,17 +60,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+
+
         // The two autocomplete support fragments may need to be moved later I just had them here
         // to make sure they were initialized properly in the app interface
         // Initialize the AutocompleteSupportFragment.
-        AutocompleteSupportFragment autocompleteFragment = (AutocompleteSupportFragment)
-                getSupportFragmentManager().findFragmentById(R.id.autocomplete_fragment1);
+        AutocompleteSupportFragment autocompleteFragmentStart = (AutocompleteSupportFragment)
+                getSupportFragmentManager().findFragmentById(R.id.autocomplete_fragmentStart);
 
         // Specify the types of place data to return.
-        autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME));
+        autocompleteFragmentStart.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME));
 
         // Set up a PlaceSelectionListener to handle the response.
-        autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+        autocompleteFragmentStart.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
             public void onPlaceSelected(@NonNull Place place) {
                 // TODO: Get info about the selected place.
@@ -84,15 +87,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
+
+
+
         // Initialize the AutocompleteSupportFragment.
-        AutocompleteSupportFragment autocompleteFragment2 = (AutocompleteSupportFragment)
-                getSupportFragmentManager().findFragmentById(R.id.autocomplete_fragment2);
+        AutocompleteSupportFragment autocompleteFragmenteEnd = (AutocompleteSupportFragment)
+                getSupportFragmentManager().findFragmentById(R.id.autocomplete_fragmentEnd);
 
         // Specify the types of place data to return.
-        autocompleteFragment2.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME));
+        autocompleteFragmenteEnd.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME));
 
         // Set up a PlaceSelectionListener to handle the response.
-        autocompleteFragment2.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+        autocompleteFragmenteEnd.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
             public void onPlaceSelected(@NonNull Place place) {
                 // TODO: Get info about the selected place.
